@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>中文打字练习</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="中文打字练习">
+        <header class="topbar">
+          <div class="brand-copy">
+            <p class="eyebrow">中文打字练习</p>
+            <h1>听见字句的节奏，再把它稳稳敲出来</h1>
+            <p class="lead">
+              支持中文原文输入、常用字拼音训练、诗词短文练习，适合每天做一点安静的手感训练。
+            </p>
+            <div class="feature-strip" aria-label="练习内容概览">
+              <span>3500 常用字</span>
+              <span>70 组拼音</span>
+              <span>文学短篇</span>
+            </div>
+          </div>
+          <div class="session-actions" aria-label="练习操作">
+            <button class="icon-button" id="restartButton" type="button" title="重新开始" aria-label="重新开始">
+              ↻
+            </button>
+            <button class="icon-button" id="nextButton" type="button" title="换一段" aria-label="换一段">
+              ⇄
+            </button>
+          </div>
+        </header>
+
+        <section class="control-row" aria-label="练习设置">
+          <label class="field-label">
+            内容
+            <select id="textSelect"></select>
+          </label>
+          <label class="field-label">
+            模式
+            <select id="modeSelect">
+              <option value="sentence">短句</option>
+              <option value="article">短文</option>
+              <option value="poem">诗词</option>
+              <option value="hanzi">常用字拼音</option>
+            </select>
+          </label>
+          <label class="toggle" id="punctuationField">
+            <input id="punctuationToggle" type="checkbox" checked />
+            <span>包含标点</span>
+          </label>
+          <label class="toggle is-hidden" id="pinyinHintField">
+            <input id="pinyinHintToggle" type="checkbox" checked />
+            <span>显示拼音</span>
+          </label>
+        </section>
+
+        <section class="stats-grid" aria-label="实时统计">
+          <article class="metric">
+            <span>速度</span>
+            <strong><span id="speedValue">0</span><small id="speedUnit"> 字/分</small></strong>
+          </article>
+          <article class="metric">
+            <span>准确率</span>
+            <strong><span id="accuracyValue">100</span><small>%</small></strong>
+          </article>
+          <article class="metric">
+            <span>用时</span>
+            <strong><span id="timeValue">00:00</span></strong>
+          </article>
+          <article class="metric">
+            <span>进度</span>
+            <strong><span id="progressValue">0</span><small>%</small></strong>
+          </article>
+        </section>
+
+        <section class="typing-panel">
+          <div class="text-meta">
+            <div>
+              <h2 id="textTitle">练习文本</h2>
+              <p id="textHint">输入框获得焦点后开始计时。</p>
+            </div>
+            <div class="text-badges">
+              <span class="meta-pill" id="textLength">0 字</span>
+              <span class="status-pill" id="compositionStatus">等待输入</span>
+            </div>
+          </div>
+
+          <div class="reference" id="referenceText" aria-label="目标文本"></div>
+
+          <label class="input-label" for="typingInput">输入内容</label>
+          <textarea
+            id="typingInput"
+            rows="4"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder="在这里输入上方文字，确认候选词后系统会判断正确与错误。"
+          ></textarea>
+
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressBar"></span>
+          </div>
+        </section>
+      </section>
+
+      <aside class="side-panel" aria-label="练习结果和历史">
+        <section class="result-panel">
+          <h2>本次结果</h2>
+          <div id="resultState" class="result-state">
+            <p>完成一段练习后，这里会展示速度、准确率和错字复盘。</p>
+          </div>
+        </section>
+
+        <section class="guide-panel">
+          <h2>练习建议</h2>
+          <ul>
+            <li>中文模式先求准确，再慢慢提速。</li>
+            <li>拼音模式每个音节用空格分隔。</li>
+            <li>遇到多音字，以本项目给出的常用读音为准。</li>
+          </ul>
+        </section>
+
+        <section class="history-panel">
+          <div class="panel-title-row">
+            <h2>历史记录</h2>
+            <button class="small-button" id="clearHistoryButton" type="button">清空</button>
+          </div>
+          <ol id="historyList" class="history-list"></ol>
+        </section>
+      </aside>
+    </main>
+
+    <script src="hanzi-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
